@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>time</title>
+</head>
+<style>
+html {
+  height: 100%;
+  
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgb(33, 190, 156), #2E4272);
+}
+
+.container {
+
+  padding: 15px;
+  border-radius: 5px;
+  background-color: rgb(110, 83, 60);
+  margin-left: 20px;
+}
+
+.screen {
+  margin: 0;
+  background-color: #47515a;
+  color: #3d4a68;
+  font-size: 64px;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: default;
+  
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.screen span {
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  margin: 10px -5px 0;
+}
+
+.buttons button {
+  flex: 1;
+  margin: 0 5px;
+  border: none;
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  
+  font-weight: bold;
+  color: #061539;
+  background-color: rgb(57, 70, 57);
+  
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  color: rgb(44, 97, 165);
+  background-color: #242833;
+}
+</style>
+<body>
+    <h1>TIMER:</h1>
+    <div class="container">
+        <h1 class="screen">
+        <span>
+            <input  id="hour" type="number" style="width:40%">
+            
+            
+        </span>
+
+        <span id>
+            <input id="minute" type="number" style="width:40%">
+            
+            
+        </span>
+
+        <span id>
+            <input id="sec" type="number" style="width:40%">
+            
+            
+        </span>
+    </h1>
+      <div class="buttons">
+
+        <button id="start">start</button>
+        <button id="reset">Reset</button>
+      </div>
+
+    </div>
+
+
+
+
+
+   
+    
+
+    
+<script>
+var start = document.getElementById('start');
+var reset = document.getElementById('reset');
+
+var h = document.getElementById("hour");
+var m = document.getElementById("minute");
+var s = document.getElementById("sec");
+//يخزن قيمة البدء
+var startTimer = null;
+start.addEventListener('click', function(){
+    //نهيء المتحولات
+    function startInterval(){
+        startTimer = setInterval(function() {
+            timer();
+        }, 1000);
+    }
+    startInterval();//يجب استدعاء التابع
+})
+reset.addEventListener('click', function(){
+    h.value = 0;
+    m.value = 0;
+    s.value = 0;
+    //ايقاف
+    stopInterval()
+})
+function timer(){
+    if(h.value == 0 && m.value == 0 && s.value == 0){
+        h.value = 0;
+        m.value = 0;
+        s.value = 0;
+    } else if(s.value != 0){
+        s.value--;
+    } else if(m.value != 0 && s.value == 0){
+        s.value = 59;
+        m.value--;
+    } else if(h.value != 0 && m.value == 0){
+        m.value = 60;
+        h.value--;
+    }
+    return;
+}
+function stopInterval() {
+    clearInterval(startTimer);
+}
+
+</script>
+
+</body>
+</html>
